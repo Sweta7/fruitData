@@ -1,0 +1,42 @@
+<div class="fruit-container">
+  <div class="header">
+    <h2 class="title">Fruit Nutrition List</h2>
+    <button type="button" class="btn btn-primary" (click)="saveSelectedFruits()">
+      <i class="bi bi-download me-1"></i> Select Fruits
+    </button>
+  </div>
+
+  @if (fruitList.length > 0) {
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th class="text-center">Select</th>
+          <th>Name</th>
+          <th>Fruityvice Id</th>
+          <th>Protein</th>
+          <th>Carbs</th>
+          <th>Calories</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (fruit of fruitList; track fruit.id) {
+          <tr>
+            <td class="text-center">
+              <div class="checkbox-container">
+                <input type="checkbox" class="custom-checkbox" [id]="'fruit-' + fruit.id" (change)="toggleSelection(fruit.id)">
+              </div>
+            </td>
+            <td><strong>{{ fruit.name }}</strong></td>
+            <td>{{ fruit.id }}</td>
+            <td><span class="fruit-badge badge-protein">{{ fruit.nutritions?.protein }}g</span></td>
+            <td><span class="fruit-badge badge-carbs">{{ fruit.nutritions?.carbohydrates }}g</span></td>
+            <td><span class="fruit-badge badge-calories">{{ fruit.nutritions?.calories }}</span></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else {
+      <p>Loading fruit data...</p>
+
+  }
+</div>
